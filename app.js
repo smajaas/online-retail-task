@@ -5,6 +5,7 @@ require('./database/config/connect');
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded());
 
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');

@@ -29,7 +29,6 @@ router.post('/', async (req, res) => {
 
 router.put('/:orderId', async (req, res) => {
   try {
-    // Assuming orderController.updateOrder is an asynchronous function to update an order
     const updatedOrder = await orderController.updateOrder(
       req.params.orderId,
       req.body
