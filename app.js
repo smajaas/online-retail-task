@@ -15,7 +15,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use(express.urlencoded({ extended: true }));
 
-// Error-handling middleware (should be defined after the routes)
+// Error-handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Internal Server Error' });

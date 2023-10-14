@@ -43,7 +43,6 @@ router.get('/:productId', async (req, res) => {
 // Update a product by ID using PUT
 router.put('/:productId', async (req, res) => {
   try {
-    // Assuming productController.updateProduct is an asynchronous function to update a product
     const updatedProduct = await productController.updateProduct(
       req.params.productId,
       req.body
@@ -52,20 +51,19 @@ router.put('/:productId', async (req, res) => {
     // Send the updated product as a JSON response
     res.json(updatedProduct);
   } catch (err) {
-    // Handle any errors, e.g., sending an error response
+    // Handle any errors
     res.status(500).json({ error: err.message });
   }
 });
 // Delete a product by ID using DELETE
 router.delete('/:productId', async (req, res) => {
   try {
-    // Assuming productController.deleteProduct is an asynchronous function to delete a product
     await productController.deleteProduct(req.params.productId);
 
     // Send a success message
     res.json({ message: 'Product deleted successfully' });
   } catch (err) {
-    // Handle any errors, e.g., sending an error response
+    // Handle any errors
     res.status(500).json({ error: err.message });
   }
 });

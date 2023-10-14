@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
 });
 router.post('/', async (req, res) => {
   try {
-    // Assuming orderController.placeOrder is an asynchronous function to create a new order
     const newOrder = await orderController.placeOrder(req.body);
 
     // Send the newly created order as a JSON response
@@ -37,7 +36,7 @@ router.put('/:orderId', async (req, res) => {
     // Send the updated order as a JSON response
     res.json(updatedOrder);
   } catch (err) {
-    // Handle any errors, e.g., sending an error response
+    // Handle any errors
     res.status(500).json({ error: err.message });
   }
 });
@@ -45,13 +44,12 @@ router.put('/:orderId', async (req, res) => {
 // Cancel an order by ID using DELETE
 router.delete('/:orderId', async (req, res) => {
   try {
-    // Assuming orderController.cancelOrder is an asynchronous function to cancel an order
     await orderController.cancelOrder(req.params.orderId);
 
     // Send a success message
     res.json({ message: 'Order canceled successfully' });
   } catch (err) {
-    // Handle any errors, e.g., sending an error response
+    // Handle any errors
     res.status(500).json({ error: err.message });
   }
 });
