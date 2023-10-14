@@ -33,7 +33,7 @@ async function getProductById(req, res) {
     }
     res.json(product);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

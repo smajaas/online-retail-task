@@ -1,28 +1,42 @@
+require('dotenv').config();
+require('express-async-errors');
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-require('./database/config/connect');
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.urlencoded());
-
+const connectDB = require('./database/config/connect');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+
+const notFoundMiddleware = require('./middleware/not-found');
+const errorMiddleware = require('./middleware/error-handler');
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send(
+    '<h1>Store Online API</h1><a href="/api/products">products route</a>'
+  );
+});
 
 // Use the routes
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Error-handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const start = async () => {
+  try {
+    //connect DB
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, console.log(`Server is listening port ${port}...`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
+
+module.exports = app;

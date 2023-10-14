@@ -2,10 +2,10 @@
   "name": "online-retail-task",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js",
+    "test": "mocha tests/orderTests.js tests/productTests.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,13 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^7.6.2",
     "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.2.0"
   }
 }
