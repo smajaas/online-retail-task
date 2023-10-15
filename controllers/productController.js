@@ -13,7 +13,7 @@ async function createProduct(req, res) {
     console.error('Error creating a new order:', error);
     res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ error: 'Please provide the details' });
+      .json({ error: 'Please provide the name,price and description' });
   }
 }
 

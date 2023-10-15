@@ -41,7 +41,7 @@ describe('Product Controller', () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(500);
+        res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('error');
         done();
