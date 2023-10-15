@@ -28,7 +28,6 @@ describe('Product Controller', () => {
         res.body.name.should.equal('Test Product');
         res.body.price.should.equal(19.99);
         res.body.description.should.equal('Test Description');
-
         done();
       });
   });
@@ -42,7 +41,7 @@ describe('Product Controller', () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(400); // Assuming 400 Bad Request for validation errors
+        res.should.have.status(500);
         res.body.should.be.an('object');
         res.body.should.have.property('error');
         done();
@@ -57,7 +56,7 @@ describe('Product Controller', () => {
         if (err) {
           return done(err);
         }
-        res.should.have.status(200); // Assuming 200 OK for successful retrieval
+        res.should.have.status(200);
         res.body.should.be.an('array');
         done();
       });

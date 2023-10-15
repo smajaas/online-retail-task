@@ -1,4 +1,6 @@
 const Product = require('../database/models/Product');
+const { StatusCodes } = require('http-status-codes');
+const { BadRequestError } = require('../errors');
 
 // Create a new product
 async function createProduct(req, res) {
@@ -6,10 +8,12 @@ async function createProduct(req, res) {
     const { name, price, description } = req.body;
     const product = new Product({ name, price, description });
     const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
+    res.status(StatusCodes.CREATED).json(savedProduct);
   } catch (error) {
     console.error('Error creating a new order:', error);
-    res.status(500).json({ error: 'Failed to create a product' });
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'Please provide the details' });
   }
 }
 
@@ -20,7 +24,7 @@ async function getAllProducts(req, res) {
     res.json(products);
   } catch (error) {
     console.log(console.log('Error:', error));
-    res.status(500).json({ error: error.message });
+    res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
   }
 }
 
@@ -29,7 +33,9 @@ async function getProductById(req, res) {
   try {
     const product = await Product.findById(req.params.productId);
     if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Product not found' });
     }
     res.json(product);
   } catch (error) {
