@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'product price must be provided'],
   },
+  description: {
+    type: String,
+    required: [true, 'product description must be provided'],
+  },
   rating: {
     type: Number,
     default: 4.5,
